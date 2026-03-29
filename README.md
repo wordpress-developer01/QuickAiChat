@@ -20,7 +20,7 @@ An AI platform for generating articles, images, and handling other creative task
 
 ### 1. Clone the repository
 ```sh
-git clone https://github.com/wordpress-developer01/Hotel.git
+git clone https://github.com/wordpress-developer01/QuickAiChat
 cd QuickAI-Full-Stack
 
 
