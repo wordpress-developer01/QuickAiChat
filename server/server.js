@@ -43,13 +43,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(
-  clerkMiddleware({
-    frontendApiProxy: {
-      enabled: true,
-    },
-  })
-);
+app.use(clerkMiddleware());
 
 app.get('/', (req, res) => res.send('Server is Live!'));
 
