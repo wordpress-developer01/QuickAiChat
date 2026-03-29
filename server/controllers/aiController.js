@@ -50,8 +50,28 @@ export const generateArticle = async (req, res)=>{
 
 
     } catch (error) {
-        console.log(error.message)
-        res.json({success: false, message: error.message})
+        const status = error?.response?.status || 500;
+        const data = error?.response?.data;
+
+        console.error('AI route error:', {
+            status,
+            data,
+            message: error.message,
+        });
+
+        if (status === 429) {
+            return res.status(429).json({
+                code: 'RATE_LIMIT',
+                message: 'Too many requests or quota exceeded. Please try again later.',
+                provider: data || null,
+            });
+        }
+
+        return res.status(500).json({
+            code: 'INTERNAL_ERROR',
+            message: 'Content generation error',
+            details: data || error.message,
+        });
     }
 }
 
@@ -90,8 +110,28 @@ export const generateBlogTitle = async (req, res)=>{
 
 
     } catch (error) {
-        console.log(error.message)
-        res.json({success: false, message: error.message})
+        const status = error?.response?.status || 500;
+        const data = error?.response?.data;
+
+        console.error('AI route error:', {
+            status,
+            data,
+            message: error.message,
+        });
+
+        if (status === 429) {
+            return res.status(429).json({
+                code: 'RATE_LIMIT',
+                message: 'Too many requests or quota exceeded. Please try again later.',
+                provider: data || null,
+            });
+        }
+
+        return res.status(500).json({
+            code: 'INTERNAL_ERROR',
+            message: 'Content generation error',
+            details: data || error.message,
+        });
     }
 }
 
